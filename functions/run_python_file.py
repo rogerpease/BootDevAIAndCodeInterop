@@ -1,6 +1,30 @@
 import os
 import subprocess
-import traceback
+
+
+schema_run_python_file = {
+    "type": "function",
+    "function": {
+        "name": "run_python_file",
+        "description": "Execute a python file",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Name of python file to execute",
+                    "required": True, 
+                }, 
+                "args": {
+                    "type": "array",
+                    "itemtype": "string",
+                    "description": "list of string arguments to the python file",
+                    "required": False, 
+                }, 
+            },
+        },
+    },
+}
 
 def run_python_file(
     working_directory: str, file_path: str, args: list[str] | None = None
@@ -46,6 +70,5 @@ def run_python_file(
        return resultstr 
 
     except Exception as e:
-       traceback.print_exc()
        return f'Error: Overall Exception {e}' 
   
